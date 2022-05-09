@@ -1,19 +1,20 @@
-<!-- 先加载js录音库，注意：你应该把js clone到本地使用 --><meta charset="utf-8" />
+<meta charset="utf-8" />
 <script src="https://xiangyuecn.github.io/Recorder/recorder.mp3.min.js"></script>
 
-<input type="button" onclick="startRec()" value="开始录音">
+<input type="button" onclick="startRec()" value="start recording">
 <hr>
-<input type="button" onclick="playRec()" value="结束并播放">
-<input type="button" onclick="uploadRec()" value="结束并上传">
+<input type="button" onclick="playRec()" value="end and play">
+<!-- <input type="button" onclick="uploadRec()" value="结束并上传"> -->
 
 <script>
 var rec;
 function startRec(){
-	rec=Recorder();//使用默认配置，mp3格式
+	rec=Recorder();
 
 	//打开麦克风授权获得相关资源
 	rec.open(function(){
 		//开始录音
+    alert("Start recording, wait a few seconds")
 		rec.start();
 	},function(msg,isUserNotAllow){
 		//用户拒绝了权限或浏览器不支持
@@ -37,7 +38,7 @@ function uploadRec(){
 
 		//直接用ajax上传
 		var xhr=new XMLHttpRequest();
-		xhr.open("POST","https://192.168.1.141:5002/receiveAudio");//这个假地址在控制台network中能看到请求数据和格式，请求结果无关紧要
+		xhr.open("POST","http://192.168.1.141:5002/receiveAudio");//这个假地址在控制台network中能看到请求数据和格式，请求结果无关紧要
 		xhr.onreadystatechange=function(){
 			if(xhr.readyState==4){
 				alert(xhr.status==200?"上传成功":"测试请先打开浏览器控制台，然后重新录音，在network选项卡里面就能看到上传请求数据和格式了");
@@ -61,6 +62,6 @@ function playRec(){
 		audio.src=URL.createObjectURL(blob);
 		audio.play();
 	},function(msg){
-		alert("录音失败:"+msg);
+		alert("Recording failed:"+msg);
 	});
 };</script>
