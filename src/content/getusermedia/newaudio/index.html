@@ -37,7 +37,7 @@ function uploadRec(){
 
 		//直接用ajax上传
 		var xhr=new XMLHttpRequest();
-		xhr.open("POST","http://192.168.1.141:5002/receiveAudio");//这个假地址在控制台network中能看到请求数据和格式，请求结果无关紧要
+		xhr.open("POST","https://192.168.1.141:5002/receiveAudio");//这个假地址在控制台network中能看到请求数据和格式，请求结果无关紧要
 		xhr.onreadystatechange=function(){
 			if(xhr.readyState==4){
 				alert(xhr.status==200?"上传成功":"测试请先打开浏览器控制台，然后重新录音，在network选项卡里面就能看到上传请求数据和格式了");
